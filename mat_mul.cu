@@ -1,8 +1,6 @@
 #include <iostream>
 #include <cuda_runtime.h>
 
-#define N 8192 // Matrix size N x N
-
 // Error handling MACRO
 #define CUDA_CHECK(call) do { \
   cudaError_t err = call; \
