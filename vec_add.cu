@@ -2,7 +2,7 @@
 #include <cuda_runtime.h>
 #include <vector>
 
-# error handling MACRO
+// Error handling MACRO
 #define CUDA_CHECK(call) do { \
   cudaError_t err = call; \
   if (err != cudaSuccess) { \
@@ -26,16 +26,18 @@ int main() {
   size_t size = n * sizeof(float);
 
   // Allocate host memory
-  float *h_A = (float)malloc(size);
-  float *h_B = (float)malloc(size);
-  float *h_C = (float)malloc(size);
+  float *h_A = (float *)malloc(size);
+  float *h_B = (float *)malloc(size);
+  float *h_C = (float *)malloc(size);
 
   // Initialize host vectors with random values 0.0 to 100.0
   // To ensure robustness, we use a simple random initialization
+  printf("Initializing data on CPU...\n");
   for (int i=0; i < n; i++) {
     h_A[i] = static_cast<float>(rand()) / (static_cast<float>(RAND_MAX / 100.0));
     h_B[i] = static_cast<float>(rand()) / (static_cast<float>(RAND_MAX / 100.0));
   }
+  
 
   // Allocate device memory
   float *d_A, *d_B, *d_C;
